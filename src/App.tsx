@@ -17,15 +17,21 @@ import { redirect } from "react-router-dom";
 
 
 const App = () => {
-  const products=useAppSelector(state=>state.productReducer)
-  console.log(products)
-  const dispatch=useAppDispatch()
-  useEffect(()=>{
-    dispatch(fetchAllProducts())
-  },[])
+  // const products=useAppSelector(state=>state.productReducer)
+  // console.log(products)
+  //   const dispatch=useAppDispatch()
+  //   useEffect(()=>{
+  //     dispatch(fetchAllProducts())
+  //     },[])
+  //     console.log(products)
+     
   
   return (
-   
+    
+    //  <div>
+    // {products.map(p=>(<p key={p.id}>{p.title}</p>))}
+    // </div>
+  
    <Provider store={store}>
     <BrowserRouter>
       <Routes>

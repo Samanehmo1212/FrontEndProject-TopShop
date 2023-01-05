@@ -46,6 +46,7 @@ const App = () => {
         <Route path='/notfound' element ={<NotFound/>}/>
         <Route path='/cart' element ={<Cart/>}/>
         <Route path='/users' element ={<Users/>}/>
+        <Route path='/product' element ={<Product/>}/>
         {/* <redirect to ="/NotFound" /> */}
       </Route>
       </Routes>

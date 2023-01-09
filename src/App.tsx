@@ -14,6 +14,7 @@ import Root from './pages/root'
 import NotFound from './pages/notFound'
 import { redirect } from "react-router-dom";
 import Users from './pages/users'
+import UserPage from './pages/UserPage'
 
 
 
@@ -45,7 +46,7 @@ const App = () => {
         <Route path='/profile' element ={<Profile/>}/>
         <Route path='/notfound' element ={<NotFound/>}/>
         <Route path='/cart' element ={<Cart/>}/>
-        <Route path='/users' element ={<Users/>}/>
+        <Route path='/users' element ={<UserPage/>}/>
         <Route path='/product' element ={<Product/>}/>
         {/* <redirect to ="/NotFound" /> */}
       </Route>

@@ -3,7 +3,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import productReducer from './reducers/productReducers';
 import cartReducer from './reducers/cartReducers';
 import userReducer from './reducers/userReducers';
-import singleProductReducer from './reducers/singleProductReducer';
+
 
 export const createStore=()=>{
   return configureStore({
@@ -11,7 +11,7 @@ export const createStore=()=>{
       productReducer,
       cartReducer,
       userReducer,
-      singleProductReducer
+      
     },
   });
 } 

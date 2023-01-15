@@ -19,6 +19,10 @@ import SingleProduct from './pages/SingleProduct'
 import Login from './pages/Login'
 import LoginForm from './components/users/LoginForm'
 import NotFound from './pages/NotFound'
+import { Logout } from '@mui/icons-material'
+import Protect from './pages/Protect'
+import RegisterationForm from './components/users/RegisterationForm'
+import LogoutForm from './pages/LogoutForm'
 
 
 
@@ -48,10 +52,12 @@ const App = () => {
            {/* <Route path=':id' render ={(props: JSX.IntrinsicAttributes & Product)=><SingleProduct {...props}/>}/> */}
         </Route>
         <Route path='/profile' element ={<Profile/>}/>
-        
+        {/* <Protect path='/profile' component={Profile} /> */}
         <Route path='/cart' element ={<Cart/>}/>
         <Route path='/users' element ={<UserPage/>}/>
         <Route path='/login' element ={<LoginForm/>}/>
+        <Route path='/logout' element ={<LogoutForm/>}/>
+        <Route path='/register' element ={<RegisterationForm/>}/>
         <Route path='/products/:id' element ={<SingleProduct/>}/>
         <Route path='/*' element={<NotFound/>}/>
         {/* <redirect to ="/NotFound" /> */}

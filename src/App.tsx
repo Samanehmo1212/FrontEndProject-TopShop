@@ -16,13 +16,14 @@ import { redirect } from "react-router-dom";
 import Users from './pages/users'
 import UserPage from './pages/UserPage'
 import SingleProduct from './pages/SingleProduct'
-import Login from './pages/Login'
+
 import LoginForm from './components/users/LoginForm'
 import NotFound from './pages/NotFound'
 import { Logout } from '@mui/icons-material'
 import Protect from './pages/Protect'
 import RegisterationForm from './components/users/RegisterationForm'
 import LogoutForm from './pages/LogoutForm'
+import FeaturedProducts from './components/products/FeaturedProducts'
 
 
 
@@ -59,7 +60,8 @@ const App = () => {
         <Route path='/logout' element ={<LogoutForm/>}/>
         <Route path='/register' element ={<RegisterationForm/>}/>
         <Route path='/products/:id' element ={<SingleProduct/>}/>
-        <Route path='/*' element={<NotFound/>}/>
+        <Route path='/categories/:id/products' element ={<FeaturedProducts/>}/>
+        {/* <Route path='/*' element={<NotFound/>}/> */}
         {/* <redirect to ="/NotFound" /> */}
       </Route>
       </Routes>

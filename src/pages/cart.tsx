@@ -22,7 +22,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import { addItem } from "../redux/reducers/cartReducers";
+import { addItem, decreseItem, deleteItem } from "../redux/reducers/cartReducers";
 import { CartType } from "../types/cartType";
 import { Product } from "../types/product";
 
@@ -36,6 +36,23 @@ const Cart = () => {
       dispatch(addItem(item));
     };
   };
+  const handleDecreseItem = (item: Product) => {
+    return (event: React.MouseEvent) => {
+      event.preventDefault();
+      dispatch(decreseItem(item));
+    };
+  };
+  const handleDeleteItem = (item: Product) => {
+    return (event: React.MouseEvent) => {
+      event.preventDefault();
+      dispatch(deleteItem(item));
+      console.log('itemitemitem',item)
+     
+    };
+  };
+  // useEffect(() => {
+   
+  // }, [])
 
   const total = cart.reduce((a, b) => a + b.cartItem.price * b.itemAmount, 0);
 
@@ -79,6 +96,8 @@ const Cart = () => {
                     </TableCell>
                     <TableCell>
                       <button onClick={handleAddItem(item.cartItem)}>+</button>
+                      <button onClick={handleDecreseItem(item.cartItem)}>-</button>
+                      <button onClick={handleDeleteItem(item.cartItem)}>Delete</button>
                       {/* <button onClick={() => dispatch(removeFromCart(item))}>-</button> */}
                     </TableCell>
                   </TableRow>

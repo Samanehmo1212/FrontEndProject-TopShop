@@ -12,16 +12,18 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
-import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { Credentials } from "../../types/user";
 import {
   authenticatCredentialWithForm,
   loginUserForm,
 } from "../../redux/reducers/userReducers";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validations/loginSchema";
+
 function Copyright(props: any) {
   return (
     <Typography
@@ -54,6 +56,7 @@ const LoginForm = () => {
   const onsubmit: SubmitHandler<Credentials> = (data) => {
     dispatch(authenticatCredentialWithForm(data));
     const token = localStorage.getItem("token");
+    
     console.log("tokentoken", token);
     if (!token) {
       return;
@@ -61,8 +64,9 @@ const LoginForm = () => {
     dispatch(loginUserForm(token));
     navigate("/profile");
   };
-  const currentUser = useAppSelector((state) => state.userReducer);
-  console.log("currentUser", currentUser.currentUser);
+  //const currentUser = localStorage.getItem('currentUser')//useAppSelector((state) => state.userReducer);
+  //const currentUser = useAppSelector((state) => state.userReducer);
+ // console.log("currentUserfromloginnnnnnn", currentUser);
 
   const handleSignUp = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();

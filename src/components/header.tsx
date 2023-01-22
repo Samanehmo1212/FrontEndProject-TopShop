@@ -23,17 +23,39 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { useEffect, useState } from "react";
 import { CartType } from "../types/cartType";
-
 import { Logout, PersonAdd } from "@mui/icons-material";
 import AccountMenue from "./users/AccountMenue1";
 import AccountMenue1 from "./users/AccountMenue1";
 import AccountMenue2 from "./users/AccountMenue2";
+import { setCurrentUser } from "../redux/reducers/userReducers";
 
 const Header = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const currentUser = useAppSelector((state) => state.userReducer.currentUser);
+  const [currentUserEmail,setCurrentUserEmail]=useState({})
   let [totalCart, settotalCart] = useState(0);
+
+  // useEffect(() => {
+  //   const data =localStorage.getItem('currentUser')
+  //   console.log('datatatatatata',data)
+    
+  //   if(data!==null ) setCurrentUserEmail(JSON.parse(data))
+  // }, [currentUserEmail]);
+
+  // useEffect(() => {
+  //   if (currentUser)
+  //   //setCurrentUserEmail(currentUser?.email)
+  //   localStorage.setItem('currentUser',JSON.stringify(currentUser));
+  // }, [currentUser]);
+
+  useEffect(() => {
+    const data =localStorage.getItem('currentUser')
+    if(data!==null ) //setCurrentUserEmail(JSON.parse(data))
+   // if (currentUserEmail)
+    dispatch(setCurrentUser(JSON.parse(data)))
+  }, [currentUser]);
+
 
   const cart = useAppSelector((state) => state.cartReducer);
   const [badge, setBadge] = useState(0);

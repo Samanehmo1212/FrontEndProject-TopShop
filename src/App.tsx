@@ -25,35 +25,22 @@ import RegisterationForm from './components/users/RegisterationForm'
 import LogoutForm from './pages/LogoutForm'
 import FeaturedProducts from './components/products/FeaturedProducts'
 
-
-
 const App = () => {
    const products=useAppSelector(state=>state.productReducer)
-  // console.log(products)
      const dispatch=useAppDispatch()
     useEffect(()=>{
       dispatch(fetchAllProducts())
       },[])
-    //  console.log(products)
-     
 
   return (
-    
-    //  <div>
-    // {products.map(p=>(<p key={p.id}>{p.title}</p>))}
-    // </div>
-  
-  
-    <BrowserRouter>
+       <BrowserRouter>
       <Routes>
         <Route path='' element={<Root/>}>
         <Route path='' element ={<Home/>}/>
         <Route path='/products'>
            <Route path='' element ={<Products/>}/>
-           {/* <Route path=':id' render ={(props: JSX.IntrinsicAttributes & Product)=><SingleProduct {...props}/>}/> */}
         </Route>
         <Route path='/profile' element ={<Profile/>}/>
-        {/* <Protect path='/profile' component={Profile} /> */}
         <Route path='/cart' element ={<Cart/>}/>
         <Route path='/users' element ={<UserPage/>}/>
         <Route path='/login' element ={<LoginForm/>}/>

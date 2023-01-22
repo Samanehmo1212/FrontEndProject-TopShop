@@ -8,13 +8,23 @@ import {
   Typography,
 } from "@mui/material";
 import * as React from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
+import { setCurrentUser } from "../redux/reducers/userReducers";
 
 const Profile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const currentUser = useAppSelector((state) => state.userReducer.currentUser);
+
+  useEffect(() => {
+    const data =localStorage.getItem('currentUser')
+    if(data!==null )// setCurrentUserEmail(JSON.parse(data))
+  //  if (currentUserEmail)
+    dispatch(setCurrentUser(JSON.parse(data)))
+  }, [currentUser]);
+
   const handleProducts = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     navigate("/products");

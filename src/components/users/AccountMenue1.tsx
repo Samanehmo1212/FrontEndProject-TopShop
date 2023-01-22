@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AccountMenue1() {
   const navigate=useNavigate()
+  
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -78,7 +79,6 @@ export default function AccountMenue1() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={()=>navigate('/login')}>
-
           <Avatar  /> Sign in
         </MenuItem>
  

@@ -48,7 +48,18 @@ const Products = () => {
   const navigate=useNavigate()
   const pageSize = 8;
   const [sortState, setSortState] = useState("");
+  const currentUser = useAppSelector((state) => state.userReducer.currentUser);
+  const [adminUser, setAdminUser] = useState("");
   const sortBy = ["Name", "Price"];
+ 
+  useEffect(() => {
+    if (currentUser?.email==='s1@gmail.com'){
+      setAdminUser ('s1@gmail.com')}
+     else{
+      setAdminUser ('')
+     } 
+   }, [currentUser]);
+
   const categoryItems = [
     "Clothes",
     "Electronics",
@@ -147,7 +158,7 @@ navigate(`/products/${id}`);
           p: "2px 4px",
           display: "flex",
           alignItems: "center",
-          width: 1000,
+        
         }}
       >
         <IconButton sx={{ p: "10px" }} aria-label="menu">
@@ -188,8 +199,10 @@ navigate(`/products/${id}`);
             <TextField {...params} label="Filter  " />
           )}
         />
+          {(adminUser!='')? (<Button  >Add new Product</Button>):(<p></p>)}
+        
       </Paper>
-
+      
       <Grid container spacing={1} direction="row" xs={12} sx={{ margin: 1 }}>
         
         {products.slice(pagination.from, pagination.to).map((product) => (

@@ -159,6 +159,13 @@ const userSlice = createSlice({
     logoutUser:(state)=>{
       if(state.currentUser)
       state.currentUser=undefined
+    },
+    setCurrentUser:(state,action )=>{
+       if((state.currentUser===undefined)){
+         state.currentUser=action.payload
+        // console.log('rrrrrrrrrrrrrrr',action.payload)
+      //   return state
+       }
     }
   },
   extraReducers: (build) => {
@@ -198,8 +205,8 @@ const userSlice = createSlice({
           return state;
         } else {
           state.currentUser = action.payload;
-          localStorage.setItem('currentUser',state.currentUser.email)
-          console.log('currentUserfromreducer',state.currentUser)
+          localStorage.setItem('currentUser',JSON.stringify(state.currentUser))
+          console.log('currentUserfromreducer',localStorage.getItem('currentUser'))
         }
       });
 
@@ -237,4 +244,4 @@ const userSlice = createSlice({
 
 const userReducer = userSlice.reducer;
 export default userReducer;
-export const { logoutUser } = userSlice.actions;
+export const { logoutUser,setCurrentUser } = userSlice.actions;

@@ -50,10 +50,7 @@ const Cart = () => {
      
     };
   };
-  // useEffect(() => {
-   
-  // }, [])
-
+ 
   const total = cart.reduce((a, b) => a + b.cartItem.price * b.itemAmount, 0);
 
   return (
@@ -98,7 +95,6 @@ const Cart = () => {
                       <button onClick={handleAddItem(item.cartItem)}>+</button>
                       <button onClick={handleDecreseItem(item.cartItem)}>-</button>
                       <button onClick={handleDeleteItem(item.cartItem)}>Delete</button>
-                      {/* <button onClick={() => dispatch(removeFromCart(item))}>-</button> */}
                     </TableCell>
                   </TableRow>
                 ))}

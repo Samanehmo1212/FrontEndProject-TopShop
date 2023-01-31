@@ -6,9 +6,7 @@ import {
   Product,
 } from "../../types/product";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { BuildOutlined } from "@mui/icons-material";
 import axiosInstance from "../../common/axiosInstance";
-import { Action } from "@remix-run/router";
 const initialState: Product[] = [];
 export const fetchAllProducts = createAsyncThunk(
   "fetchAllProducts",
@@ -24,14 +22,16 @@ export const fetchAllProducts = createAsyncThunk(
 export const fetchProductsByCategory = createAsyncThunk(
   "fetchProductsByCategory",
   async (id: string) => {
-      try {
-          const res: AxiosResponse<Product[], Product[]> = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`)
-          return res.data
-      } catch (e: any) {
-
-          console.log(e)
-      }
-  })
+    try {
+      const res: AxiosResponse<Product[], Product[]> = await axios.get(
+        `https://api.escuelajs.co/api/v1/categories/${id}/products`
+      );
+      return res.data;
+    } catch (e: any) {
+      console.log(e);
+    }
+  }
+);
 export const fetchSingleProduct = createAsyncThunk(
   "fetchSingleProduct",
   async (productId: string) => {
@@ -123,7 +123,6 @@ const productSlice = createSlice({
     },
     filterbyCategory: (state, action) => {
       if (action.payload === "Clothes") {
-        // state=state.filter((p)=>p.category.name===action.payload)
         console.log("filteeeeer", state);
         state = state.filter((item) => {
           return item.category.name === action.payload;
@@ -180,24 +179,20 @@ const productSlice = createSlice({
     });
     build.addCase(fetchProductsByCategory.fulfilled, (state, action) => {
       if (action.payload) {
-          return action.payload
-
+        return action.payload;
       } else {
-          return state
+        return state;
       }
-  })
+    });
     build.addCase(fetchProductsByCategory.rejected, (state, action) => {
-      console.log("Error fetching data")
-      return state
-  });
-  build.addCase(fetchProductsByCategory.pending, (state, action) => {
-    console.log("Data is loading...")
-    return state
-})
-// build.addCase(createProduct.fulfilled, (state, action) => {
-//     if (action.payload) {
-//         state.push(action.payload)
-//     }})
+      console.log("Error fetching data");
+      return state;
+    });
+    build.addCase(fetchProductsByCategory.pending, (state, action) => {
+      console.log("Data is loading...");
+      return state;
+    });
+
     build.addCase(modifyProduct.fulfilled, (state, action) => {
       return state.map((product) => {
         if (product.id === action.payload?.id) {

@@ -23,7 +23,6 @@ import {
   loginUserForm,
 } from "../../redux/reducers/userReducers";
 import { loginSchema } from "../../validations/loginSchema";
-
 function Copyright(props: any) {
   return (
     <Typography
@@ -56,7 +55,6 @@ const LoginForm = () => {
   const onsubmit: SubmitHandler<Credentials> = (data) => {
     dispatch(authenticatCredentialWithForm(data));
     const token = localStorage.getItem("token");
-    
     console.log("tokentoken", token);
     if (!token) {
       return;
@@ -64,15 +62,11 @@ const LoginForm = () => {
     dispatch(loginUserForm(token));
     navigate("/profile");
   };
-  //const currentUser = localStorage.getItem('currentUser')//useAppSelector((state) => state.userReducer);
-  //const currentUser = useAppSelector((state) => state.userReducer);
- // console.log("currentUserfromloginnnnnnn", currentUser);
 
   const handleSignUp = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     navigate("/register");
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -103,7 +97,6 @@ const LoginForm = () => {
               fullWidth
               id="email"
               label="Email Address"
-              //    name="email"
               autoComplete="email"
               autoFocus
               {...register("email")}
@@ -113,7 +106,6 @@ const LoginForm = () => {
               margin="normal"
               required
               fullWidth
-              //      name="password"
               label="Password"
               type="password"
               id="password"

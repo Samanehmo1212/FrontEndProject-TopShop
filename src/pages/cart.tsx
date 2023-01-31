@@ -1,12 +1,8 @@
+import * as React from "react";
 import {
   Box,
-  Button,
-  Card,
   Divider,
   Grid,
-  IconButton,
-  List,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -16,20 +12,18 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
-import * as React from "react";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import { addItem, decreseItem, deleteItem } from "../redux/reducers/cartReducers";
-import { CartType } from "../types/cartType";
+import {
+  addItem,
+  decreseItem,
+  deleteItem,
+} from "../redux/reducers/cartReducers";
 import { Product } from "../types/product";
 
 const Cart = () => {
   const cart = useAppSelector((state) => state.cartReducer);
   const dispatch = useAppDispatch();
-
   const handleAddItem = (item: Product) => {
     return (event: React.MouseEvent) => {
       event.preventDefault();
@@ -46,13 +40,10 @@ const Cart = () => {
     return (event: React.MouseEvent) => {
       event.preventDefault();
       dispatch(deleteItem(item));
-      console.log('itemitemitem',item)
-     
+      console.log("itemitemitem", item);
     };
   };
- 
   const total = cart.reduce((a, b) => a + b.cartItem.price * b.itemAmount, 0);
-
   return (
     <Box
       style={{
@@ -93,8 +84,12 @@ const Cart = () => {
                     </TableCell>
                     <TableCell>
                       <button onClick={handleAddItem(item.cartItem)}>+</button>
-                      <button onClick={handleDecreseItem(item.cartItem)}>-</button>
-                      <button onClick={handleDeleteItem(item.cartItem)}>Delete</button>
+                      <button onClick={handleDecreseItem(item.cartItem)}>
+                        -
+                      </button>
+                      <button onClick={handleDeleteItem(item.cartItem)}>
+                        Delete
+                      </button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -108,10 +103,6 @@ const Cart = () => {
 
                   <TableCell>
                     <button>Proceed to checkout</button>
-                    {/* {show ?
-                                        <Button color="success">Place order</Button>
-                                        : null
-                                    } */}
                   </TableCell>
                 </TableRow>
               </TableFooter>
@@ -120,10 +111,6 @@ const Cart = () => {
           <Divider variant="middle" />
         </Grid>
       </Grid>
-      {/* {show ?
-            <Button color="warning" onClick={() => dispatch(emptyCart())}>Empty Cart</Button>
-            : null
-        } */}
     </Box>
   );
 };

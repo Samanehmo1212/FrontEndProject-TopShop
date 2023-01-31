@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Autocomplete,
   Button,
@@ -9,11 +10,7 @@ import {
   Divider,
   Grid,
   IconButton,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
   InputBase,
-  ListSubheader,
   Pagination,
   Paper,
   TextField,
@@ -24,41 +21,32 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import { useEffect, useState } from "react";
+
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import {
   fetchAllProducts,
-  filterbyCategory,
   sortByName,
 } from "../redux/reducers/productReducers";
 import { addItem } from "../redux/reducers/cartReducers";
-import InfoIcon from "@mui/icons-material/Info";
-import Cart from "./cart";
-
 import { Product } from "../types/product";
 import formatCurrency from "../utilities/formatCurrency";
-import { CartType } from "../types/cartType";
-import Categories from "../components/ProductCategories";
-import ProductCategories from "../components/ProductCategories";
-import ProductPagination from "../components/products/ProductPagination";
 import SingleProduct from "./SingleProduct";
-import { Link, useNavigate } from "react-router-dom";
-import { iteratorSymbol } from "immer/dist/internal";
 
 const Products = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const pageSize = 8;
   const [sortState, setSortState] = useState("");
   const currentUser = useAppSelector((state) => state.userReducer.currentUser);
   const [adminUser, setAdminUser] = useState("");
   const sortBy = ["Name", "Price"];
- 
+
   useEffect(() => {
-    if (currentUser?.email==='s1@gmail.com'){
-      setAdminUser ('s1@gmail.com')}
-     else{
-      setAdminUser ('')
-     } 
-   }, [currentUser]);
+    if (currentUser?.email === "s1@gmail.com") {
+      setAdminUser("s1@gmail.com");
+    } else {
+      setAdminUser("");
+    }
+  }, [currentUser]);
 
   const categoryItems = [
     "Clothes",
@@ -68,7 +56,7 @@ const Products = () => {
     "Others",
   ];
   const [category, setCategory] = useState("");
-  
+
   const [pagination, setPagination] = useState({
     count: 0,
     from: 0,
@@ -86,7 +74,6 @@ const Products = () => {
 
   const cart = useAppSelector((state) => state.cartReducer);
   const dispatch = useAppDispatch();
-  //let [products,setProducts]=useState([])
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -114,21 +101,22 @@ const Products = () => {
     }
   }, [pagination.from, pagination.to]);
 
-
   const additem = (product: Product) => {
     dispatch(addItem(product));
   };
 
-  const handleShowDetails = (event:React.MouseEvent<HTMLElement>,id:number) => {
+  const handleShowDetails = (
+    event: React.MouseEvent<HTMLElement>,
+    id: number
+  ) => {
     event.preventDefault();
-navigate(`/products/${id}`);
-     // const singleProduct:Product=product
-      <SingleProduct  />;
-    
-
+    navigate(`/products/${id}`);
+    <SingleProduct />;
   };
-  function sortByhandleChange(event: React.SyntheticEvent<Element, Event>,
-    value: string | null): void {
+  function sortByhandleChange(
+    event: React.SyntheticEvent<Element, Event>,
+    value: string | null
+  ): void {
     if (value) {
       setSortState(value);
       dispatch(sortByName(value));
@@ -146,10 +134,6 @@ navigate(`/products/${id}`);
       setCategory("");
     }
   };
-  // useEffect(() => {
-  //   dispatch(fetchAllProducts());
-  // }, [category,search]);
-
   return (
     <>
       <Paper
@@ -158,7 +142,6 @@ navigate(`/products/${id}`);
           p: "2px 4px",
           display: "flex",
           alignItems: "center",
-        
         }}
       >
         <IconButton sx={{ p: "10px" }} aria-label="menu">
@@ -169,7 +152,6 @@ navigate(`/products/${id}`);
           placeholder="Search Users Name"
           inputProps={{ "aria-label": "Search Users Name" }}
           value={search}
-          //onChange={handleSearch}
           onChange={(e) => setSearch(e.target.value)}
         />
         <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
@@ -199,12 +181,9 @@ navigate(`/products/${id}`);
             <TextField {...params} label="Filter  " />
           )}
         />
-          {(adminUser!='')? (<Button  >Add new Product</Button>):(<p></p>)}
-        
+        {adminUser !== "" ? <Button>Add new Product</Button> : <p></p>}
       </Paper>
-      
       <Grid container spacing={1} direction="row" xs={12} sx={{ margin: 1 }}>
-        
         {products.slice(pagination.from, pagination.to).map((product) => (
           <Grid item lg={3} xs={3} key={product.id}>
             <Card style={{ maxHeight: 450 }}>
@@ -226,15 +205,14 @@ navigate(`/products/${id}`);
                   <Button onClick={() => additem(product)} size="small">
                     + Add To Cart
                   </Button>
-
-   
                 </Box>
                 <Box>
-                  {/* <Link to={`/products/${product.id}`}> */}
-                    <Button onClick={(e) => handleShowDetails(e,product.id)} size="small">
-                      Details
-                    </Button>
-                  {/* </Link> */}
+                  <Button
+                    onClick={(e) => handleShowDetails(e, product.id)}
+                    size="small"
+                  >
+                    Details
+                  </Button>
                 </Box>
               </CardActions>
             </Card>

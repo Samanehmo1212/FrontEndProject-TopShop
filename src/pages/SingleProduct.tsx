@@ -1,5 +1,5 @@
+import * as React from "react";
 import {
-  Box,
   Button,
   Card,
   CardActionArea,
@@ -7,25 +7,17 @@ import {
   CardMedia,
   Grid,
   Typography,
-  Link,
 } from "@mui/material";
-import { isAsyncThunkAction } from "@reduxjs/toolkit";
-import axios from "axios";
-import * as React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import { addItem } from "../redux/reducers/cartReducers";
-import { fetchSingleProduct } from "../redux/reducers/productReducers";
-import { Product } from "../types/product";
 
 const SingleProduct = (props: any) => {
   const navigate = useNavigate();
   let { id } = useParams();
   const [product, setProduct] = useState({});
-
   const dispatch = useAppDispatch();
-
   const singleProductState = useAppSelector((state) =>
     state.productReducer.filter((item) => {
       if (id) {
@@ -37,7 +29,6 @@ const SingleProduct = (props: any) => {
     event.preventDefault();
     navigate("/products");
   };
-
   return (
     <>
       <Grid
@@ -61,12 +52,10 @@ const SingleProduct = (props: any) => {
               component="img"
               sx={{
                 justifyContent: "center",
-                // maxWidth: '100%',
                 objectFit: "cover",
                 width: "400px",
                 height: "200px",
               }}
-              // image={singleProductState.images[0]}
               image={singleProductState[0].images[0]}
             />
             <CardContent>
@@ -80,9 +69,6 @@ const SingleProduct = (props: any) => {
               <Typography paragraph component="div">
                 {singleProductState[0].description}
               </Typography>
-              {/* <Button onClick={()=>additem(props) } size="small">+ Add To Cart</Button> */}
-              {/* <Button onClick={()=>{props.history.push('/products')}} size="small">Products</Button> */}
-
               <Button
                 onClick={(e) => {
                   handleProducts(e);

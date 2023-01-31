@@ -1,30 +1,9 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  Link,
-  List,
-  ListItem,
-  Badge,
-  MenuItem,
-  Avatar,
-  Divider,
-  ListItemIcon,
-  Menu,
-  Tooltip,
-} from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import LoginIcon from "@mui/icons-material/Login";
-
-import LogoutIcon from "@mui/icons-material/Logout";
-import Button from "@mui/material/Button";
-import * as React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
+import { Grid, IconButton, Badge } from "@mui/material";
 import { useEffect, useState } from "react";
-import { CartType } from "../types/cartType";
-import { Logout, PersonAdd } from "@mui/icons-material";
-import AccountMenue from "./users/AccountMenue1";
+import { NavLink, useNavigate } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import AccountMenue1 from "./users/AccountMenue1";
 import AccountMenue2 from "./users/AccountMenue2";
 import { setCurrentUser } from "../redux/reducers/userReducers";
@@ -33,50 +12,27 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const currentUser = useAppSelector((state) => state.userReducer.currentUser);
-  const [currentUserEmail,setCurrentUserEmail]=useState({})
+  const [currentUserEmail, setCurrentUserEmail] = useState({});
   let [totalCart, settotalCart] = useState(0);
-
-  // useEffect(() => {
-  //   const data =localStorage.getItem('currentUser')
-  //   console.log('datatatatatata',data)
-    
-  //   if(data!==null ) setCurrentUserEmail(JSON.parse(data))
-  // }, [currentUserEmail]);
-
-  // useEffect(() => {
-  //   if (currentUser)
-  //   //setCurrentUserEmail(currentUser?.email)
-  //   localStorage.setItem('currentUser',JSON.stringify(currentUser));
-  // }, [currentUser]);
-
   useEffect(() => {
-    const data =localStorage.getItem('currentUser')
-    if(data!==null ) //setCurrentUserEmail(JSON.parse(data))
-   // if (currentUserEmail)
-    dispatch(setCurrentUser(JSON.parse(data)))
+    const data = localStorage.getItem("currentUser");
+    if (data !== null) dispatch(setCurrentUser(JSON.parse(data)));
   }, [currentUser]);
-
-
   const cart = useAppSelector((state) => state.cartReducer);
   const [badge, setBadge] = useState(0);
-
   const handleBadge = () => {
     let sum = 0;
     cart.forEach((item) => {
       sum += item.itemAmount;
     });
-
     setBadge(sum);
   };
-
   useEffect(() => {
     handleBadge();
   });
-
   useEffect(() => {
     if (cart.length !== 0) totalCart = cart[1].itemAmount;
   }, [totalCart]);
-
   const handleCart = () => {
     navigate("cart");
   };
@@ -88,21 +44,29 @@ const Header = () => {
       sx={{ padding: 1, borderBottom: 1, borderColor: "divider" }}
     >
       <Grid item xs={1}>
-        <NavLink style={{ fontSize:25,marginLeft: 15, textDecoration: "none" }} to="">
-        {`    Home   `}
-          
+        <NavLink
+          style={{ fontSize: 25, marginLeft: 15, textDecoration: "none" }}
+          to=""
+        >
+          {`    Home   `}
         </NavLink>
       </Grid>
       <Grid item xs={1}>
-        <NavLink style={{fontSize:25, margin: 0, textDecoration: "none" }} to="Products">
-        {`    Products   `}
+        <NavLink
+          style={{ fontSize: 25, margin: 0, textDecoration: "none" }}
+          to="Products"
+        >
+          {`    Products   `}
         </NavLink>
       </Grid>
-      <Grid item xs={8}justifyContent="center"alignItems="center" style={{textAlign: "center"}}>
-        <h1  style={{ marginTop: 0 }}>TopShop</h1>
-        {/* <NavLink style={{ margin: 0, textDecoration: "none" }} to="#">
-         <img src="./pic/logo.png"/>
-        </NavLink> */}
+      <Grid
+        item
+        xs={8}
+        justifyContent="center"
+        alignItems="center"
+        style={{ textAlign: "center" }}
+      >
+        <h1 style={{ marginTop: 0 }}>TopShop</h1>
       </Grid>
       <Grid item xs={1}>
         <IconButton

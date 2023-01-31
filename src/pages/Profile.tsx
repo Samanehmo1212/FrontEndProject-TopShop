@@ -10,6 +10,7 @@ import {
 import * as React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { setCurrentUser } from "../redux/reducers/userReducers";
 
@@ -19,19 +20,16 @@ const Profile = () => {
   const currentUser = useAppSelector((state) => state.userReducer.currentUser);
 
   useEffect(() => {
-    const data =localStorage.getItem('currentUser')
-    if(data!==null )// setCurrentUserEmail(JSON.parse(data))
-  //  if (currentUserEmail)
-    dispatch(setCurrentUser(JSON.parse(data)))
+    const data = localStorage.getItem("currentUser");
+    if (data !== null) dispatch(setCurrentUser(JSON.parse(data)));
   }, [currentUser]);
-
   const handleProducts = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     navigate("/products");
   };
   const handleEdit = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    navigate('/products')
+    navigate("/products");
   };
   return (
     <Box
@@ -42,8 +40,6 @@ const Profile = () => {
         justifyContent: "center",
       }}
     >
-      {/* <Box><h3>{currentUser?.name}</h3></Box>
-        <img src={currentUser?.avatar} alt="" /> */}
       <Card style={{ maxHeight: 450, width: 200 }}>
         <CardMedia
           component="img"

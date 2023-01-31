@@ -41,8 +41,8 @@ const Products = () => {
   const sortBy = ["Name", "Price"];
 
   useEffect(() => {
-    if (currentUser?.email === "s1@gmail.com") {
-      setAdminUser("s1@gmail.com");
+    if (currentUser?.email === "admin@mail.com") {
+      setAdminUser("admin@mail.com");
     } else {
       setAdminUser("");
     }

@@ -1,8 +1,6 @@
-import { Password } from "@mui/icons-material";
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
-import { S } from "msw/lib/SetupServerApi-70cc71a7";
-import { fetchAllProducts } from "../../redux/reducers/productReducers";
+
 import {
   authenticatCredential,
   fetchAllUsers,
